@@ -21,7 +21,11 @@ public class Board {
 		}
 		
 	}
-	void printBoard() {
+	
+	public int getSize() {
+		return this.boardSize;
+	}
+	public void printBoard() {
 		for(int i = 0; i < boardSize; i++) {
 			for(int j = 0; j < boardSize; j++) {
 				if(ticTacToeBoard.get(i).get(j) == null)
@@ -77,10 +81,11 @@ public class Board {
 		return false;
 	}
 	
-	public Boolean updateTicTacToeBoard(Player player, int row, int col, Symbol symbol) {
+	public int updateTicTacToeBoard(Player player, int row, int col, Symbol symbol) {
 		
 		if(row < 0 || col < 0 || row >= boardSize || col >= boardSize || ticTacToeBoard.get(row).get(col) != null) {
-			throw new IllegalArgumentException("Please choose valid row, col");
+			System.out.println("Please choose valid row, col");
+			return -1;
 		}
 		
 		ticTacToeBoard.get(row).set(col, symbol);
@@ -89,8 +94,9 @@ public class Board {
 		boolean result = checkIfWon(row, col, symbol);
 		if(result) {
 			System.out.println("Yeahh!! Player "+ player.getName() + " won!");
+			return 0;
 		}
-		return result;		
+		return 1;		
 		
 	}
 	
